@@ -51,9 +51,8 @@
           submitOption.addEventListener("click", function () {
               let correctScore =0;
 
-              for (const questions in correctAnswers) { //loop while there are answers left to check
-                  const selectedOption = document.querySelector('input[name=$(questions)"]:checked`); //declares selected
-
+              for (const questions in correctAnswers) { 
+                  const selectedOption = document.querySelector('input[name=$(questions)"]:checked`); 
                   if(selectedOption && selectedOption.value === correctAnswers[questions]) {
                     correctScore++;
                 };
