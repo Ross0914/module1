@@ -1,0 +1,66 @@
+<!Doctype html>
+  <head>
+      <title>Quiz App</title>
+  </head>
+  </body>
+      <p>What is option C</p><br>
+      <input type="radio" name="q1" value="1">a. I am option A</input><br>
+      <input type="radio" name="q1" value="2">b. I am option B</input><br>
+      <input type="radio" name="q1" value="3">c. I am option C</input><br>
+      <input type="radio" name="q1" value="4">d. I am option D</input><br>
+      
+      <p>What IDE am i using</p><br>
+      <input type="radio" name="q2" value="1">a. Notepad++</input><br>
+      <input type="radio" name="q2" value="1">b. Netbeans</input><br>
+      <input type="radio" name="q2" value="1">c. Visual Studio</input><br>
+      <input type="radio" name="q2" value="1">d. txt editor</input><br>
+
+      <p>What color is Barney</p><br>
+      <input type="radio" name="q3" value="1">a. Purple</input><br>
+      <input type="radio" name="q3" value="1">b. Blue</input><br>
+      <input type="radio" name="q3" value="1">c. Pink</input><br>
+      <input type="radio" name="q3" value="1">d. Yellow</input><br>
+
+      <p>What is 4+4</p><br>
+      <input type="radio" name="q4" value="1">a. 5</input><br>
+      <input type="radio" name="q4" value="1">b. 6</input><br>
+      <input type="radio" name="q4" value="1">c. 7</input><br>
+      <input type="radio" name="q4" value="1">d. 8</input><br>
+
+      <p>What is 4x4</p><br>
+      <input type="radio" name="q5" value="1">a. 3</input><br>
+      <input type="radio" name="q5" value="1">b. 4/input><br>
+      <input type="radio" name="q5" value="1">c. 8</input><br>
+      <input type="radio" name="q5" value="1">d. 7</input><br>
+
+      <button id="submit">Submit Answers</button><br>
+      <p id="result"></p>
+
+      <script>
+          let sbumitOption = document.getElementById("submit");
+          let userResult = document.getElementById("result");
+
+          const correctAnswers = (
+              q1: "3",
+              q2: "1", 
+              q3: "1", 
+              q4: "4", 
+              q5: "3", 
+          );
+
+          submitOption.addEventListener("click", function () {
+              let correctScore =0;
+
+              for (const questions in correctAnswers) { //loop while there are answers left to check
+                  const selectedOption = document.querySelector('input[name=$(questions)"]:checked`); //declares selected
+
+                  if(selectedOption && selectedOption.value === correctAnswers[questions]) {
+                    correctScore++;
+                };
+          );
+
+          userResult.textContent = ~You scored$(Correct Score)!`;
+        ));
+    </script>
+  </body>
+</html>
