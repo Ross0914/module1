@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Pokemon</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 15px;
+            }
+            #pokemonList {
+                margin-bottom: 15px;
+            }
+            #pokemonInfo {
+                border: 1px solid #e9b7b7;
+                padding: 10px;
+                margin-top: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Generation 1 Pokemon</h1>
+        <select id="pokemonList">
+            <option value="">Select</option>
+        </select>
+        <div id="pokemonInfo"></div>
+
+        <script>
+            const baseUrl = "https://pokeapi.co/api/v2/pokemon?limit=151";
+            const pokemonList = document.getElementById("pokemonList");
+            const pokemonInfo = document.getElementById("pokemonInfo");
+
+            pokemonList.addEventListener("change", getPokemonInfo);
+
+            fetch(baseUrl)
+                .then(response => response.json())
+                .then(data => {
+                    data.results.forEach((pokemon, index) => {
+                        let option = document.createElement("option");
+                        option.value = index + 1;
+                        option.textContent = pokemon.name;
+                        pokemonList.appendChild(option);
+                    });
+                });
+
+            function getPokemonInfo() {
+                let pokemonId = pokemonList.value;
+                if (pokemonId) {
+                    fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            pokemonInfo.innerHTML = `
+                                <h2>${data.name}</h2>
+                                <img src="${data.sprites.front_default}" alt="${data.name}">
+                                <p>Height: ${data.height}</p>
+                                <p>Weight: ${data.weight}</p>
+                            `;
+                        });
+                } else {
+                    pokemonInfo.innerHTML = "";
+                }
+            }
+        </script>
+    </body>
+</html>
