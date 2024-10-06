@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pay Calculator</title>
+    <script>
+        function paySalary() {
+            var employeeName = document.getElementById("name").value;
+            var employeeHours = document.getElementById("hours").value;
+            var salary = 0;
+
+            if (employeeHours <= 40) {
+                var regtime = 10.00 * employeeHours;
+                var overtime = 0.00;
+                salary = regtime;
+            } else {
+                var regtime = (10.00 * 40);
+                var overtime = ((10.00 * 1.5) * (employeeHours - 40));
+                salary = (regtime + overtime);
+            }
+
+            document.getElementById("nameOutput").innerHTML = "Employee Name: " + employeeName;
+            document.getElementById("pay").innerHTML = "Employee Gross Pay: $" + salary.toFixed(2);
+        }
+
+        function testPaySalary() {
+            // Test 1: Regular hours
+            document.getElementById("name").value = "John Doe";
+            document.getElementById("hours").value = 40;
+            paySalary();
+            console.assert(document.getElementById("pay").innerHTML === "Employee Gross Pay: $400.00", "Test 1 Failed");
+
+            // Test 2: Overtime hours
+            document.getElementById("name").value = "Jane Smith";
+            document.getElementById("hours").value = 50;
+            paySalary();
+            console.assert(document.getElementById("pay").innerHTML === "Employee Gross Pay: $490.00", "Test 2 Failed");
+
+            console.log("Tests completed. Check console for results.");
+        }
+    </script>
+</head>
+<body>
+    <input id="name" value="STUDENT'S NAME HERE" />
+    <input id="hours" value="50" />
+    <br>
+    <span id="nameOutput"></span>
+    <br>
+    <span id="pay">0</span>
+    <br>
+    <button onclick="paySalary()">Calculate Pay</button>
+    <button onclick="testPaySalary()">Run Tests</button>
+</body>
+</html>
