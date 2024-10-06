@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pay Calculator</title>
+    <script>
+        const totalEmployees = 35; // Total number of employees
+        let submittedTimesheets = 0; // Count of how many timesheets are in
+        const ficoTaxDue = 19268.98; // Expected FICA tax total
+
+        function calculatePay() {
+            let employeeName = document.getElementById("name").value;
+            let hoursWorked = document.getElementById("hours").value;
+            let salary = 0;
+
+            // Calculate salary based on hours worked
+            if (hoursWorked <= 40) {
+                salary = 10.00 * hoursWorked;
+            } else {
+                salary = (10.00 * 40) + (10.00 * 1.5 * (hoursWorked - 40));
+            }
+
+            // Update the UI with results
+            document.getElementById("nameOutput").innerHTML = "Employee Name: " + employeeName;
+            document.getElementById("pay").innerHTML = "Employee Gross Pay: $" + salary.toFixed(2);
+
+            // Increment the count of submitted timesheets
+            submittedTimesheets++;
+        }
+
+        function checkAllTimesheets() {
+            if (submittedTimesheets === totalEmployees) {
+                console.log("All timesheets are in.");
+                return true;
+            } else {
+                console.log("Not all timesheets have been submitted.");
+                return false;
+            }
+        }
+
+        function verifyFICATax() {
+            const totalPay = submittedTimesheets * (10 * 40); // Simple total calculation for all employees
+            const totalFICATax = totalPay * 0.0765; // Example FICA rate
+
+            if (totalFICATax === ficoTaxDue) {
+                console.log("FICA tax looks good!");
+                return true;
+            } else {
+                console.log(`FICA tax issue: Expected $${ficoTaxDue}, but got $${totalFICATax}`);
+                return false;
+            }
+        }
+
+        function runTests() {
+            // Test case for normal hours
+            document.getElementById("name").value = "John Doe";
+            document.getElementById("hours").value = 40;
+            calculatePay();
+            console.assert(document.getElementById("pay").innerHTML === "Employee Gross Pay: $400.00", "Test failed for 40 hours.");
+
+            // Test case for overtime
+            document.getElementById("name").value = "Jane Smith";
+            document.getElementById("hours").value = 50;
+            calculatePay();
+            console.assert(document.getElementById("pay").innerHTML === "Employee Gross Pay: $490.00", "Test failed for 50 hours.");
+
+            // Check for timesheet submissions
+            checkAllTimesheets();
+
+            // Verify FICA tax
+            verifyFICATax();
+
+            console.log("All tests have run. Check the console for the results.");
+        }
+    </script>
+</head>
+<body>
+    <input id="name" value="Enter Employee Name" />
+    <input id="hours" value="50" />
+    <br>
+    <span id="nameOutput"></span>
+    <br>
+    <span id="pay">0</span>
+    <br>
+    <button onclick="calculatePay()">Calculate Pay</button>
+    <button onclick="runTests()">Run Tests</button>
+</body>
+</html>
