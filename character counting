@@ -1,0 +1,39 @@
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        // Prompt the user to enter a string
+        Console.Write("Enter a string: ");
+        string input = Console.ReadLine().ToLower();
+
+        // Dictionary to store character counts
+        Dictionary<char, int> charCounts = new Dictionary<char, int>();
+
+        // Loop through the string character by character
+        foreach (char c in input)
+        {
+            // Update count only if character is alphabetic
+            if (char.IsLetter(c))
+            {
+                if (charCounts.ContainsKey(c))
+                {
+                    charCounts[c]++;
+                }
+                else
+                {
+                    charCounts[c] = 1;
+                }
+            }
+        }
+
+        // Display character counts
+        Console.WriteLine("Character frequencies:");
+        foreach (var entry in charCounts)
+        {
+            Console.WriteLine(entry.Key + ": " + entry.Value);
+        }
+    }
+}
