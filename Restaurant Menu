@@ -1,0 +1,29 @@
+public class MenuItem
+{
+    public string Name { get; set; }
+    public decimal Price { get; set; }
+    public string Description { get; set; }
+    public string Category { get; set; }
+    public bool IsNew { get; set; }
+
+    public MenuItem(string name, decimal price, string description, string category, bool isNew = false)
+    {
+        Name = name;
+        Price = price;
+        Description = description;
+        Category = category;
+        IsNew = isNew;
+    }
+}
+
+public class Menu
+{
+    public List<MenuItem> Items { get; private set; } = new List<MenuItem>();
+    public DateTime LastUpdated { get; private set; } = DateTime.Now;
+
+    public void AddMenuItem(MenuItem item)
+    {
+        Items.Add(item);
+        LastUpdated = DateTime.Now;
+    }
+}
